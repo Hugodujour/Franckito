@@ -699,6 +699,689 @@
   <p>Voici un lien vers le <a href="https://gitfront.io/r/user-2490534/2NHpnyRn8n1Q/active-storage-api/" rel="nofollow"
       target="_blank">repo du projet</a></p>
 
+  <h1>Rails et JSON</h1>
+
+  <p>Dans cette ressource, nous allons voir comment jouer avec une API Rails.</p>
+
+  <h2>1. Introduction</h2>
+
+  <p>Et voilà ! Après avoir joué avec des APIs pendant plusieurs semaines, nous allons voir comment monter une
+    application Rails en mode API ! Dans cette ressource nous verrons les bases d&#39;une app Rails API, puis nous te
+    donnerons quelques astuces pour l&#39;authentification, ou une app React.</p>
+
+  <h2>2. Contexte et historique</h2>
+
+  <p>Avec la montée du JSON en tant que format d&#39;échange de données Web, Rails a rapidement mis en place une gestion
+    d&#39;application en mode API.</p>
+
+  <h2>3. La ressource</h2>
+
+  <h3>3.1. Une app Rails en API</h3>
+
+  <p>Il est tout à fait possible d&#39;utiliser Rails pour faire une API. <a
+      href="https://guides.rubyonrails.org/api_app.html" rel="nofollow" target="_blank">La documentation</a> explique
+    les spécificités d&#39;une app en API. </p>
+
+  <p>Pour créer une app Rails en mode API :</p>
+
+  <pre><code class="prettyprint lang-shell">$ rails new my_api --api
+      </code></pre>
+
+  <h3>3.2. Un CRUD en Rails</h3>
+
+  <p>Pour faire un CRUD en Rails, le scaffold est ton ami :) En faisant un truc genre <code
+      class="prettyprint">rails g scaffold Article title:string content:text</code> dans une app API, tu pourras voir
+    comment générer un CRUD d&#39;articles du côté Rails.</p>
+
+  <p>Puis en t&#39;aidant des routes et un peu de bon sens sur Postman / Insomnia, tu peux faire les requêtes pour
+    accéder à ton CRUD. Ainsi pour accéder à l&#39;index des articles, tu peux faire GET <code
+      class="prettyprint">/articles</code>. </p>
+
+  <p>Ou alors pour créer un article, tu feras un POST <code class="prettyprint">/articles</code> avec les paramètres
+    dans le JSON. Par voici un JSON qui va créer un article :</p>
+
+  <pre><code class="prettyprint lang-js">// POST /articles
+      {
+          &quot;article&quot;:
+          {
+              &quot;title&quot;:&quot;titre&quot;,
+               &quot;content&quot;:&quot;contenu&quot;
+          }
+      }
+      </code></pre>
+
+  <h3>3.3. Authentification en API</h3>
+
+  <p>Pour l&#39;authentification c&#39;est une autre paire de manche. La bonne nouvelle est que Rails aime bien les
+    solutions qui font le café pour toi et qui te donnent une Gem qui fera tout le travail d&#39;authentification. La
+    mauvaise nouvelle est que l&#39;on n&#39;aura pas le temps de prendre 2-3 jours à te faire recoder à la main un
+    système, pour te montrer la magie de Devise (un peu comme ce que nous avions fait avec les Session/Cookies et
+    Devise).</p>
+
+  <p>On devra donc te montrer l&#39;équivalent de Devise pour un système d&#39;authentification, te montrer comment le
+    brancher, te faire galérer avec les problèmes de configuration, en mode &quot;boite noire qui gère tout pour
+    toi&quot;.</p>
+
+  <h4>3.1.1. JWT</h4>
+
+  <p>La technique que nous te recommandons pour l&#39;authentification est de passer par les JSON Web Tokens (JWT) :
+    Rails propose un Gem qui gère très bien cela.</p>
+
+  <p>Avant de brancher la Gem, nous allons te montrer comment les JWT marchent, quels sont leurs avantages et défauts
+    par rapport à un système de sessions/cookies. Pour ceci, nous avons deux vidéos phénoménales qui expliquent à
+    merveille la techno JWT, faites par Koushik Kothagal de la chaîne Java Brains : </p>
+
+  <ul>
+    <li><a href="https://www.youtube.com/watch?v=soGRyl9ztjI" rel="nofollow" target="_blank">What is JWT authorization
+        really about</a></li>
+    <li><a href="https://www.youtube.com/watch?v=_XbXkVdoG_0" rel="nofollow" target="_blank">What is the structure of a
+        JWT</a></li>
+  </ul>
+
+  <p>Une fois que tu as vu ces vidéos, la techno JWT devrait être beaucoup moins floue. Nous pouvons passer à
+    l&#39;implémentation :)</p>
+
+  <h4>3.1.2. devise-jwt</h4>
+
+  <p>Nous te conseillons de passer par la Gem <a href="https://github.com/waiting-for-dev/devise-jwt" rel="nofollow"
+      target="_blank">devise-jwt</a> pour la gestion de l&#39;authentification. Avec les vidéos explicatives, le README
+    devrait être moins <u>sec</u> à la lecture, mais un tuto reste tout de même bienvenu. Nous te recommandons <a
+      href="https://jameschambers.co.uk/rails-api" rel="nofollow" target="_blank">celui-là</a>.</p>
+
+  <p>On ne te cache pas que ces branchements ne seront pas aisés et que tu auras probablement un effet &quot;boite
+    noire&quot;, mais avec de l&#39;entraide et de la motivation, brancher un système d&#39;authentification est tout à
+    fait à ta portée :)</p>
+
+  <h3>3.4. Rails API + React</h3>
+
+  <p>Bon, c&#39;est bien beau tout cela, mais maintenant comment on fait pour brancher notre app Rails à tes beaux front
+    React ?</p>
+
+  <p>Il y a pas mal de techniques, mais celle que l&#39;on recommande est de faire (au moins) 2 répos séparés : un pour
+    ton app React, un autre pour ton API. Tu mettras en prod les 2 répos et BOUM, tu auras une app fullstack 😎</p>
+
+  <h2>4. Points importants à retenir</h2>
+
+  <p>Rails gère très bien les APIs, pour l&#39;authentification nous te conseillons de passer par la Gem <a
+      href="https://github.com/waiting-for-dev/devise-jwt" rel="nofollow" target="_blank">devise-jwt</a>, et de faire un
+    répo pour ton API back, et un répo pour ton front en React.</p>
+
+  <h2>5. Pour aller plus loin</h2>
+
+  <p>Pour le moment on est pas mal 👻</p>
+
+  <h1>Utiliser Rails pour créer une API JSON</h1>
+
+  <p>Deuxième étape: utiliser une appli Rails comme API JSON pour un front en React</p>
+
+  <h2>1. Introduction</h2>
+
+  <p>Hier tu t&#39;es remis dans le bain de Ruby on Rails avec une application tranquille. Aujourd&#39;hui, nous allons
+    te demander de refaire la même application, mais en mode API, avec du JSON et compagnie.</p>
+
+  <h2>2. Le projet</h2>
+
+  <h3>2.1. L&#39;application du jour</h3>
+
+  <p>Nous allons te redemander de faire une application simple : un blog avec des articles. Tu pourras faire un CRUD
+    complet pour les articles : création, index, lecture, edit, update, destroy. Le tout sera en API JSON.</p>
+
+  <h3>2.2. Rails</h3>
+
+  <p>Pour ce projet, tu vas devoir le faire en Ruby <code class="prettyprint">3.x.x.</code> (installe-le si tu ne
+    l&#39;as pas).</p>
+
+  <p>Crée une nouvelle app avec Rails 7 mais cette fois-ci en <a href="https://edgeguides.rubyonrails.org/api_app.html"
+      rel="nofollow" target="_blank">mode API uniquement</a>.</p>
+
+  <p>Pour la BDD, tu peux utiliser PG ou SQLite3, à ta guise.</p>
+
+  <hr>
+
+  <p>🚀 ALERTE BONNE ASTUCE</p>
+
+  <p>En ayant à refaire les mêmes briques qu&#39;hier mais avec une configuration différente, tu devrais moins avoir à
+    te prendre la tête sur les détails et aller directement au but : tu vas voir que tu peux préciser directement plein
+    de choses à tes <a href="https://guides.rubyonrails.org/command_line.html" rel="nofollow" target="_blank">commandes
+      rails</a> pour avoir encore moins de travail à faire à la main 😉 Comme cette fois-ci ton appli n&#39;est
+    qu&#39;en mode API, il y a un paquet de trucs qui ne sont plus nécessaires (et qui ne sont donc même pas générés par
+    Rails) : la gestion des sessions par exemple, celle des cookies aussi et les vues en HTML ! Ça va te permettre de
+    différencier un peu plus la structure globale Rails d&#39;une partie de ses composants.</p>
+
+  <hr>
+
+  <h3>2.3. Les articles</h3>
+
+  <h4>2.3.1. Scaffold</h4>
+
+  <p>On va commencer par un model <code class="prettyprint">Article</code> qui contient :</p>
+
+  <ul>
+    <li>les timestamps</li>
+    <li>un <code class="prettyprint">title</code>, qui est un <code class="prettyprint">string</code></li>
+    <li>un <code class="prettyprint">content</code>, qui est un <code class="prettyprint">text</code></li>
+  </ul>
+
+  <p>Crée donc le model <code class="prettyprint">Article</code> à l&#39;aide du scaffold.</p>
+
+  <h4>2.3.2. Seed</h4>
+
+  <p>Fais un petit seed qui créé une trentaine d&#39;articles. Tu peux utiliser Faker pour créer des articles ayant du
+    <code class="prettyprint">content</code> marrant.</p>
+
+  <h3>2.4. Authentification</h3>
+
+  <p>Passons au vif du sujet : l&#39;authentification. Pour ceci, nous allons passer par la gem <code
+      class="prettyprint">devise-jwt</code>. La principale différence par rapport à hier, c&#39;est qu&#39;on veut se
+    logguer en utilisant l&#39;API, avec un email et un password. Quand on s&#39;authentifie, on récupère un token
+    &quot;Bearer&quot; dans le header &quot;Authentication&quot; qu&#39;on va donc réutiliser dans chaque requête qui
+    nécessite une authentification. N&#39;hésite pas à utiliser la ressource proposée par notre alumni Boris Gilles pour
+    brancher <a href="https://github.com/Beygs/Devise-API-Authentification-Ruby-on-Rails-7" rel="nofollow"
+      target="_blank">devise-jwt</a> en version Rails 7+.</p>
+
+  <p>Nous allons reprendre les lignes directrices de hier :</p>
+
+  <ul>
+    <li>Commence par lier les users aux articles en base, puis change le seed en fonction</li>
+    <li>Rends le signup et signin possibles</li>
+    <li>Fais en sorte que la création et édition d&#39;un article ne soient accessibles qu&#39;aux utilisateurs
+      connectés</li>
+    <li>L&#39;auteur d&#39;un article ? La personne qui s&#39;est authentifiée</li>
+    <li>Fais en sorte que les fonctionnalités de destroy et d&#39;edit/update ne soient accessibles qu&#39;aux
+      propriétaires des articles</li>
+  </ul>
+
+  <p>Et voilà ! Tu as une API fonctionnelle en Rails. Cela t&#39;a pris relativement peu de temps, mais imagine que si
+    tu devais le refaire, ce serait à la vitesse de l&#39;éclair ⚡⚡⚡</p>
+
+  <p>On peut passer aux exos d&#39;après pour renforcer tes compétences en APIs (notamment les images qui pourraient te
+    servir plus tard 😉), mais tu peux profiter de cette app fonctionnelle pour jouer avec. Tu peux même t&#39;amuser à
+    la mettre en production et de faire jouer tes amis avec !</p>
+
+  <h3>2.5. BONUS STAGE</h3>
+
+  <h4>2.5.1. Validation</h4>
+
+  <p>Fais en sorte que les <code class="prettyprint">title</code>, <code class="prettyprint">content</code> de tes
+    articles, <code class="prettyprint">email</code> de tes users aient une validation à la présence, histoire
+    d&#39;éviter de pouvoir créer des articles sans title.</p>
+
+  <h4>2.5.2. Un peu d&#39;intimité c&#39;est sympa</h4>
+
+  <p>Notre application respecte la vie privée de nos utilisateurs. On aimerait qu&#39;un user puisse décider qu&#39;un
+    de ses articles soit privé. Quand c&#39;est le cas, l&#39;article n&#39;est visible que par le user.</p>
+
+  <h4>2.5.3. Commentaires</h4>
+
+  <p>On va maintenant permettre aux users de commenter les article. Un commentaire est créé par un user et seul le user
+    peut le modifier/supprimer.</p>
+
+  <p>Les commentaires peuvent être consultés en faisant <code class="prettyprint">/articles/3/comments.json</code> qui
+    récupèrera par exemple les commentaires de l&#39;article 3.</p>
+
+  <h4>2.5.4. Images</h4>
+
+  <p>Allez, c&#39;est le niveau ultime. Notre blog est aussi un blog de passionnés de photo. Fais en sorte qu&#39;un
+    utilisateur puisse aussi créer des photos. Une photo aura juste l&#39;image, et appartiendra à un utilisateur, qui
+    pourra l&#39;éditer ou la supprimer. Ça marche comme les articles, sauf que tu auras de belles photos à la place.
+  </p>
+
+  <h2>3. Rendu attendu</h2>
+
+  <p>Exactement comme hier :)</p>
+
+  <p>Si tu veux prendre un peu d&#39;avance pour ce qui va t&#39;arriver pendant les projets finaux, c&#39;est une bonne
+    idée de tenter un deploy sur Heroku, histoire de comprendre ce que ça change dans la config de ton app Heroku quand
+    tu utilises ces nouveaux outils JS.</p>
+
+  <h1>Projet Bonus : Monolithe Rails Active Storage + React</h1>
+
+  <p>Ce projet est un bonus, il permet de faire un formulaire React pour stocker une image sur un back Ruby avec
+    affichage en front React.</p>
+
+  <h2>1. Introduction</h2>
+
+  <p>Ce projet est entièrement un bonus, il n&#39;a pas de point dans la guideline, si tu n&#39;as pas le temps de le
+    faire aujourd&#39;hui je te propose de le faire plus tard, il pourrait t&#39;être utile pour comprendre le lien à
+    faire entre ton front React et ton back Rails pour stocker et afficher une image.</p>
+
+  <h2>2. Le projet</h2>
+
+  <h3>2.1. L&#39;application du jour</h3>
+
+  <p>Aujourd&#39;hui tu va voir comment faire une application d&#39;envoie et de stockage d&#39;image en React et RoR,
+    pas de panique pour le projet du jour, aucune recherche, nous allons décomposer et analyser l&#39;application
+    ensemble.</p>
+
+  <h3>2.2. Monolithe</h3>
+
+  <p>Pour le projet du jour, celui-ci sera fait en Monolithe, ce n&#39;est pas beaucoup utilisé dans le monde du
+    travail, mais si un jour tu en croises, tu sauras t&#39;y adapter. Le principe est simple, nous allons créer une
+    application React dans ton application RoR, et faire tourner chaque appli sur un port différent.</p>
+
+  <p>En premier lieu nous allons initialiser l&#39;API RoR :</p>
+
+  <pre><code class="prettyprint lang-shell">rails new active-storage-api --api
+</code></pre>
+
+  <p>Ensuite on se rend dans l&#39;application avec un petit <code class="prettyprint">cd</code> pour y créer
+    l&#39;application Frontend React :</p>
+
+  <pre><code class="prettyprint lang-shell">npx create-react-app frontend
+</code></pre>
+
+  <h3>2.3. Active Storage</h3>
+
+  <p>Nous allons ensuite installé Active Storage sur l&#39;application, et faire un scaffold de post avec un titre.</p>
+
+  <p>Pour installer Active Storage :</p>
+
+  <pre><code class="prettyprint lang-shell">rails active_storage:install
+</code></pre>
+
+  <p>Puis un petit scaffold des familles :</p>
+
+  <pre><code class="prettyprint lang-shell">rails g scaffold post title
+</code></pre>
+
+  <p>Sans oublier notre fameuse :</p>
+
+  <pre><code class="prettyprint lang-shell">rails db:migrate
+</code></pre>
+
+  <p>À partir de là, on peut déjà lancer un petit <code class="prettyprint">rails server</code> pour vérifier que tout
+    va bien. N&#39;oublie pas, nous sommes en mode API de RoR, si tu ne vois qu&#39;un gros logo rouge sur fond blanc,
+    c&#39;est que c&#39;est bon.</p>
+
+  <h3>2.4. Backend Rails App</h3>
+
+  <p>Maintenant, il nous faut setup côté App Rails, pour ceci, on attaque le Controller, le Model, le fichier de route,
+    cors et sa gem.</p>
+
+  <p>Pour le Contrôler Posts, on ajoute sous la méthode destroy :</p>
+
+  <pre><code class="prettyprint lang-ruby"># DELETE /posts/1
+def destroy
+  @post.destroy
+end
+
+def latest
+  @post = Post.last
+  render json: @post
+end
+
+private
+</code></pre>
+
+  <p>Dans le fichier des routes :</p>
+
+  <pre><code class="prettyprint lang-ruby">resources :posts
+get &#39;latest&#39;, to: &#39;posts#latest&#39;
+</code></pre>
+
+  <p>Normalement à partir de là, si tu te rends sur <code class="prettyprint">localhost:3000/latest</code> tu devrais te
+    retrouvez face à un format json t&#39;affichant <code class="prettyprint">null</code>. N&#39;oublions pas
+    d&#39;activer le cors, dans <code class="prettyprint">config/initializers/cors.rb</code>, il te suffit simplement de
+    décommenter des lignes 8 à 16 et de mettre un <code class="prettyprint">&quot;*&quot;</code> à la place de <code
+      class="prettyprint">&quot;exemple.com&quot;</code>. Et dans ton Gemfile, de décommenter la ligne avec <code
+      class="prettyprint">gem &quot;rack-cors&quot;</code>, puis de faire un bundle install. N&#39;oublie pas de
+    relancer ton serveur Rails.</p>
+
+  <p>On va pouvoir setup la partie image en modifiant le Model <code class="prettyprint">post.rb</code> :</p>
+
+  <pre><code class="prettyprint lang-ruby">class Post &lt; ApplicationRecord
+  has_one_attached :image
+end
+</code></pre>
+
+  <p>Et ajouter dans le Contrôler Posts un paramètre d&#39;image :</p>
+
+  <pre><code class="prettyprint lang-ruby">def post_params
+  params.require(:post).permit(:title, :image)
+end
+</code></pre>
+
+  <p>Pour le moment on va laisser le code ainsi et s&#39;attaquer à la partie Frontend.</p>
+
+  <h3>2.5. Frontend React App</h3>
+
+  <p>On va pouvoir commencer à attaquer la partie Frontend avec l&#39;application React, je t&#39;invite donc à ouvrir
+    un nouveau terminal, afin de laisser ton application RoR tourner en fond. Sur ce nouveau terminal fraichement
+    ouverts il te suffit de te rendre dans l&#39;application React avec un <code class="prettyprint">cd frontend</code>,
+    puis de lancer ton application avec <code class="prettyprint">npm run start</code>. Nous avons maintenant 2 applis
+    qui tournent en même temps, un back RoR et un front React.</p>
+
+  <hr>
+
+  <p><strong>ALERTE ERREUR COMMUNE</strong></p>
+
+  <p>Si lors du démarrage de l&#39;application cela te lance sur le port 3000, qui est déjà utilisé par ton application
+    RoR, sans te proposer de lancer sur un nouveau port, alors tu dois le faire manuellement.</p>
+
+  <p>La nouvelle commande pour modifier le port en 3001 est <code class="prettyprint">PORT=3001 npm run start</code></p>
+
+  <hr>
+
+  <h4>2.5.1. La base de l&#39;App React</h4>
+
+  <p>Maintenant nous allons modifier le contenu du fichier <code class="prettyprint">src/App.js</code>, il te suffit de
+    supprimer l&#39;intégralité du contenu du header (compris) pour y ajouter le contenu de la page que nous souhaitons,
+    ici l&#39;affichage du formulaire et d&#39;une image, le nouveau rendu devrait ressembler à cela :</p>
+
+  <pre><code class="prettyprint lang-js">import logo from &#39;./logo.svg&#39;;
+import &#39;./App.css&#39;;
+import { createContext, useState } from &quot;react&quot;;
+
+export const AppContext = createContext(null);
+
+function App() {
+  const [lastestPost, setLatestPost] = useState(AppContext)
+  return (
+    &lt;AppContext.Provider value={{ latestPost, setLatestPost}}&gt;
+      &lt;div className=&quot;App&quot;&gt;
+        &lt;FileForm /&gt;
+        &lt;LatestImage /&gt;
+      &lt;/div&gt;
+    &lt;/AppContext.Provider&gt; 
+  );
+}
+
+export default App;
+</code></pre>
+
+  <p>Comme tu l&#39;auras compris, il nous faut donc créer les composants <code class="prettyprint">FileForm</code> et
+    <code class="prettyprint">LatestImage</code>, pour cela, création d&#39;un dossier <code
+      class="prettyprint">components</code> dans le dossier <code class="prettyprint">src</code>. Puis de 2 fichiers
+    dans le dossier components, <code class="prettyprint">FileForm.jsx</code> et <code
+      class="prettyprint">LatestImage.jsx</code>.</p>
+
+  <hr>
+
+  <p><strong>ALERTE BONNE ASTUCE</strong></p>
+
+  <p>Si tu ne l&#39;as pas déjà, pense à installer l&#39;extension <a
+      href="https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets" rel="nofollow"
+      target="_blank">ES7+ React/Redux/React-Native snippets</a>, une fois fait, dans tes fichiers <code
+      class="prettyprint">.jsx</code>, tu auras juste à écrire <code class="prettyprint">rcfe</code> puis à appuyer sur
+    tab pour créer la base de ton fichier.</p>
+
+  <hr>
+
+  <p>Normalement en suivant l&#39;astuce tu te retrouves avec 2 fichiers, un fichier <code
+      class="prettyprint">FileForm.jsx</code> avec :</p>
+
+  <pre><code class="prettyprint lang-js">import React from &#39;react&#39;
+
+function FileForm() {
+  return (
+    &lt;div&gt;FileForm&lt;/div&gt;
+  )
+}
+
+export default FileForm
+</code></pre>
+
+  <p>et un fichier <code class="prettyprint">LatestImage.jsx</code> avec :</p>
+
+  <pre><code class="prettyprint lang-js">import React from &#39;react&#39;
+
+function LatestImage() {
+  return (
+    &lt;div&gt;LatestImage&lt;/div&gt;
+  )
+}
+
+export default LatestImage
+</code></pre>
+
+  <p>Une fois les 2 fichiers créés, on va pouvoir les importer dans notre fichier <code
+      class="prettyprint">App.js</code> :</p>
+
+  <pre><code class="prettyprint lang-js">import FileForm from &#39;./components/FileForm&#39;;
+import LatestImage from &#39;./components/LatestImage&#39;;
+</code></pre>
+
+  <p>Un petit refresh de page sur le <code class="prettyprint">localhost:3001</code> et on devrait pouvoir voir FileForm
+    et LatestImage écrit en texte.</p>
+
+  <h4>2.5.2. La création du formulaire d&#39;Upload</h4>
+
+  <p>On va pouvoir attaquer le vif du sujet, le formulaire d&#39;Upload d&#39;image coté Frontend. Nous allons donc
+    maintenant travailler sur le fichier <code class="prettyprint">FileForm.jsx</code>.</p>
+
+  <p>Voici le code du formulaire à mettre, un simple formulaire :</p>
+
+  <pre><code class="prettyprint lang-js">return (
+  &lt;div&gt;
+    &lt;h1&gt;FileForm&lt;/h1&gt;
+    &lt;form onSubmit={(e) =&gt; handleSubmit(e)}&gt;
+      &lt;label htmlFor=&quot;title&quot;&gt;Title&lt;/label&gt;
+      &lt;input type=&quot;text&quot; name=&quot;title&quot; id=&quot;title&quot; /&gt;
+      &lt;br /&gt;
+
+      &lt;label htmlFor=&quot;image&quot;&gt;Image&lt;/label&gt;
+      &lt;input type=&quot;file&quot; name=&quot;image&quot; id=&quot;image&quot; /&gt;
+      &lt;br /&gt;
+
+      &lt;button type=&quot;submit&quot;&gt;Create Post&lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+)
+</code></pre>
+
+  <p>Nous avons donc une fonction handleSubmit à créer : </p>
+
+  <pre><code class="prettyprint lang-js">function handleSubmit(event) {
+  event.preventDefault();
+  const data = new FormData();
+
+  data.append(&quot;post[title&quot;, event.target.title.value);
+  data.append(&quot;post[image]&quot;, event.target.image.files[0]);
+  submitToAPI(data);
+}
+</code></pre>
+
+  <p>Ainsi qu&#39;une fonction submitToAPI :</p>
+
+  <pre><code class="prettyprint lang-js">function submitToAPI(data) {
+  fetch(&quot;http://localhost:3000/posts&quot;, {
+    method: &quot;POST&quot;,
+    body: data
+  })
+    .then(response =&gt; response.json())
+    .then(data =&gt; {
+      setLatestPost(data.image_url);
+    })
+    .catch((error) =&gt; console.error(error));
+}
+</code></pre>
+
+  <p>Le fichier complet devrait ressembler à ça :</p>
+
+  <pre><code class="prettyprint lang-js">import React, { useContext } from &#39;react&#39;
+import { AppContext } from &#39;../App&#39;
+
+function FileForm() {
+  const { latestPost, setLatestPost } = useContext(AppContext);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const data = new FormData();
+
+    data.append(&quot;post[title&quot;, event.target.title.value);
+    data.append(&quot;post[image]&quot;, event.target.image.files[0]);
+    submitToAPI(data);
+  }
+
+  function submitToAPI(data) {
+    fetch(&quot;http://localhost:3000/posts&quot;, {
+      method: &quot;POST&quot;,
+      body: data
+    })
+      .then(response =&gt; response.json())
+      .then(data =&gt; {
+        setLatestPost(data.image_url);
+      })
+      .catch((error) =&gt; console.error(error));
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;FileForm&lt;/h1&gt;
+      &lt;form onSubmit={(e) =&gt; handleSubmit(e)}&gt;
+        &lt;label htmlFor=&quot;title&quot;&gt;Title&lt;/label&gt;
+        &lt;input type=&quot;text&quot; name=&quot;title&quot; id=&quot;title&quot; /&gt;
+        &lt;br /&gt;
+
+        &lt;label htmlFor=&quot;image&quot;&gt;Image&lt;/label&gt;
+        &lt;input type=&quot;file&quot; name=&quot;image&quot; id=&quot;image&quot; /&gt;
+        &lt;br /&gt;
+
+        &lt;button type=&quot;submit&quot;&gt;Create Post&lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  )
+}
+
+export default FileForm
+</code></pre>
+
+  <p>Je n&#39;ai pas besoin de t&#39;expliquer chaque ligne, à ce stade de la formation tu devrais les comprendre.
+    Normalement sur ton Front tu devrais maintenant voir ton formulaire d&#39;envoi d&#39;image. Tu peux même envoyer
+    une image maintenant, tu ne verras rien, mais tu auras des infos de stockage de ton image coté serveur Rails, et sur
+    ton chemin d&#39;accès <code class="prettyprint">http://localhost:3000/latest</code> tu verras les informations en
+    format Json de la dernière image chargée.</p>
+
+  <h4>2.5.3. Composant d&#39;affichage de l&#39;image</h4>
+
+  <p>Ensuite, on va pouvoir s&#39;attaquer au fichier <code class="prettyprint">LatestImage.jsx</code>, ce composant
+    sert à afficher la dernière image postée par l&#39;utilisateur, de ce fait, nous allons faire un petit useEffect qui
+    s&#39;activera à chaque nouveau Post.</p>
+
+  <p>Voici en code l&#39;<code class="prettyprint">useEffect</code> en question :</p>
+
+  <pre><code class="prettyprint lang-js">useEffect(() =&gt; {
+    fetch(&quot;http://localhost:3000/posts&quot;)
+      .then((response) =&gt; response.json())
+      .then((data) =&gt; {
+        setLatestPost(data.image_url);
+      })
+      .catch((error) =&gt; console.error(error));
+  }, [latestPost]);
+</code></pre>
+
+  <p>Avec son affichage dans le return :</p>
+
+  <pre><code class="prettyprint lang-js">&lt;img src={latestPost} alt=&quot;latest post&quot; className=&quot;latest-image&quot;/&gt;
+</code></pre>
+
+  <p>Le fichier complet devrait ressembler à cela :</p>
+
+  <pre><code class="prettyprint lang-js">import React, { useContext, useEffect } from &#39;react&#39;
+import { AppContext } from &#39;../App&#39;
+
+function LatestImage() {
+  const { latestPost, setLatestPost } = useContext(AppContext);
+
+  useEffect(() =&gt; {
+    fetch(&quot;http://localhost:3000/latest&quot;)
+      .then((response) =&gt; response.json())
+      .then((data) =&gt; {
+        setLatestPost(data.image_url);
+      })
+      .catch((error) =&gt; console.error(error));
+  }, [latestPost]);
+
+  return (
+    &lt;div&gt;
+      &lt;img src={latestPost} alt=&quot;latest post&quot; className=&quot;latest-image&quot;/&gt;
+    &lt;/div&gt;
+  )
+}
+
+export default LatestImage
+</code></pre>
+
+  <p>Tu peux ajouter un peu de CSS dans ton <code class="prettyprint">App.css</code>, pour y mettre un peu de forme,
+    comme ici :</p>
+
+  <pre><code class="prettyprint lang-css">.latest-image {
+  width: 300px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+</code></pre>
+
+  <p>Et non, ton image ne s&#39;affiche toujours pas ! Il va falloir retourner côté back et l&#39;améliorer un peu</p>
+
+  <h3>2.6. Retour sur le back</h3>
+
+  <h4>2.6.1. Amélioration du Controller</h4>
+
+  <p>Ici on ajoute une petite info dans le Controller pour essayer de récupérer l&#39;image :</p>
+
+  <pre><code class="prettyprint lang-ruby">def latest
+  @post = Post.last.to_json(include: [:image])
+  render json: @post
+end
+</code></pre>
+
+  <p>Maintenant, en rechargeant la page <code class="prettyprint">http://localhost:3000/latest</code>, tu devrais avoir
+    les bonnes informations sur l&#39;image, mais il manque toujours ce qu&#39;il nous intéresse vraiment, soit
+    l&#39;URL de l&#39;image. Alors nous allons devoir la créer nous-mêmes, et cela ce passe dans le Model <code
+      class="prettyprint">post.rb</code>. La méthode image_url se présente ainsi :</p>
+
+  <pre><code class="prettyprint lang-ruby">def image_url
+  Rails.application.routes.url_helpers.url_for(image) if image.attached?
+end
+</code></pre>
+
+  <p>Ainsi que d&#39;ajouter du contenu dans ton fichier config/environments/development.rb, au-dessus de <code
+      class="prettyprint">Rails.application.configure do</code>, comme ceci :</p>
+
+  <pre><code class="prettyprint lang-ruby">Rails.application.routes.default_url_options = {
+  host: &#39;http://localhost:3000&#39;
+}
+</code></pre>
+
+  <p>Il faudra ensuite améliorer ton Controller (encore), en modifiant le <code
+      class="prettyprint">(include: [:image])</code> par <code class="prettyprint">(include: [:image_url])</code>. Un
+    petit refresh de <code class="prettyprint">http://localhost:3000/latest</code> et la BOUM, une erreur. <code
+      class="prettyprint">undefined method</code>serializable_hash&#39;` Et en plus, elle a pas l&#39;air sympa
+    celle-là. Voilà je te laisse la résoudre bonne chance à toi...</p>
+
+  <h4>2.6.2. Mise en place de JSONAPI-Serializer</h4>
+
+  <p>Bien sur que nan, je vais pas te laisser comme ça, bon cette fois, on va juste arrêter ton application Rails, pour
+    travailler rapidement sur le terminal, un petit <code class="prettyprint">bundle add jsonapi-serializer</code>,
+    suivis d&#39;un <code class="prettyprint">rails g serializer post id title</code> qui va nous créer un fichier <code
+      class="prettyprint">app/serializers/post_serializer.rb</code> que nous allons légèrement modifier en y ajoutant
+    certain attribus comme ceci :</p>
+
+  <pre><code class="prettyprint lang-ruby">class PostSerializer
+  include JSONAPI::Serializer
+  attributes :id, :title, :image, :created_at, :updated_at, :image_url
+end
+</code></pre>
+
+  <p>On peut ensuite retourner sur le Controller Post (oui encore), afin de modifier la méthode latest ainsi :</p>
+
+  <pre><code class="prettyprint lang-ruby">def latest
+  @post = Post.last
+  render json: PostSerializer.new(@post).serializable_hash[:data][:attributes]
+end
+</code></pre>
+
+  <p>Une relance du <code class="prettyprint">rails server</code>, un refresh de la page <code
+      class="prettyprint">http://localhost:3000/latest</code> et normalement toutes les infos sont là, on peut même
+    cliquer sur le lien affiché pour avoir un visuel de l&#39;image.</p>
+
+  <p>Maintenant, tu as juste à retourner sur ton front pour te rendre compte que ton image s&#39;affiche correctement.
+    Félicitation 🎉🎉</p>
+
+  <p>Voici un lien vers le <a href="https://gitfront.io/r/user-2490534/2NHpnyRn8n1Q/active-storage-api/" rel="nofollow"
+      target="_blank">repo du projet</a></p>
 
 </body>
 
